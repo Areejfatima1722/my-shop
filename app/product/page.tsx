@@ -1,11 +1,17 @@
-import { getProduct } from "@/lib/data";
-export default async function ProductDetail({ searchParams }: { searchParams: { id: string } }) {
-const product = await getProduct(searchParams.id);
+import { getProductById } from "@/lib/products";
+import AddToCart from "@/components/AddToCart";
+
+
+export default async function Product({ searchParams }: { searchParams: { id: string } }) {
+const product = await getProductById(searchParams.id);
+
+
 return (
 <div>
-<h1 className="font-bold">{product.title}</h1>
-<p>{product.description}</p>
-<p>${product.price}</p>
+<h1 className="text-xl font-bold">{product.title}</h1>
+<p className="my-2">{product.description}</p>
+<p className="font-semibold">${product.price}</p>
+<AddToCart product={product} />
 </div>
 );
 }
